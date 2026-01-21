@@ -34,6 +34,15 @@ public class Lista {
     }
 
     public boolean excluir(int valor){
+        if(this.cabeca == null){
+            return false;
+        }
+
+        if(valor == this.cabeca.getValor()){
+            this.cabeca = this.cabeca.getProximo();
+            return true;
+        }
+
         No atual = this.cabeca;
         No ant = null;
 
