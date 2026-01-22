@@ -30,4 +30,11 @@ void main() {
     IO.println("----------------------------------------");
 
     //---------------------ORDENAÇÃO------------------------
+    Array array = new Array(10);
+    Ordenacao ordenacao = new Ordenacao();
+    IO.println("Array antes da ordenação:");
+    array.imprimeArray();
+    //ordenacao.bubbleSort(array.getArr());
+    IO.println("Array depois da ordenação:");
+    array.imprimeArray();
 }
