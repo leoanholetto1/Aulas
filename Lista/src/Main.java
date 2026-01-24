@@ -35,6 +35,9 @@ void main() {
     IO.println("Array antes da ordenação:");
     array.imprimeArray();
     //ordenacao.bubbleSort(array.getArr());
+    //ordenacao.selectionSort(array.getArr());
+    //ordenacao.insertionSort(array.getArr());
+    //ordenacao.insertionSort2(array.getArr());
     IO.println("Array depois da ordenação:");
     array.imprimeArray();
 }
