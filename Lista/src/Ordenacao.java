@@ -54,4 +54,49 @@ public class Ordenacao {
             arr[j] = key;
         }
     }
+
+    public void coutingSort(int arr[]){
+        int mx = arr[0];
+        for(int i=1;i<arr.length;i++){
+            if(arr[i] > mx){
+                mx = arr[i];
+            }
+        }
+        int[] count = new int[mx + 1];
+        for(int i=0;i<arr.length;i++){
+            count[arr[i]]++;
+        }
+        int index = 0;
+        for(int i=0;i<=mx;i++){
+            while(count[i] > 0){
+                arr[index] = i;
+                index++;
+                count[i]--;
+            }
+        }
+    }
+
+    public void countingSort2(int arr[]){
+        int mx = arr[0];
+        for(int i=1;i<arr.length;i++){
+            if(arr[i] > mx){
+                mx = arr[i];
+            }
+        }
+        int[] count = new int[mx + 1];
+        for(int i=0;i<arr.length;i++){
+            count[arr[i]]++;
+        }
+        for(int i=1;i<=mx;i++) {
+            count[i] += count[i - 1];
+        }
+        int[] output = new int[arr.length];
+        for(int i=0;i<arr.length;i++){
+            output[count[arr[i]] - 1] = arr[i];
+            count[arr[i]]--;
+        }
+        for(int i=0;i<arr.length;i++){
+            arr[i] = output[i];
+        }
+    }
 }

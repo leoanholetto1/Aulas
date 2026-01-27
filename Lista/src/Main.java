@@ -38,6 +38,8 @@ void main() {
     //ordenacao.selectionSort(array.getArr());
     //ordenacao.insertionSort(array.getArr());
     //ordenacao.insertionSort2(array.getArr());
+    //ordenacao.coutingSort(array.getArr());
+    ordenacao.countingSort2(array.getArr());
     IO.println("Array depois da ordenação:");
     array.imprimeArray();
 }
