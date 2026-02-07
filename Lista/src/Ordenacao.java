@@ -163,4 +163,60 @@ public class Ordenacao {
             arr[ini+k] = aux[k];
         }
     }
+
+    public void cocktailSort(int arr[]){
+        boolean swapped = true;
+        int start = 0;
+        int end = arr.length - 1;
+        while(swapped){
+            swapped = false;
+            for(int i=start; i < end; i++){
+                if(arr[i] > arr[i+1]){
+                    int aux = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = aux;
+                    swapped = true;
+                }
+            }
+            end--;
+            if(swapped){
+                swapped = false;
+                for(int i = end;i>start;i--){
+                    if(arr[i] < arr[i-1]){
+                        int aux = arr[i];
+                        arr[i] = arr[i-1];
+                        arr[i-1] = aux;
+                        swapped = true;
+                    }
+                }
+                start++;
+            }
+        }
+    }
+
+    public void count(int[] arr, int exp){
+        int conta[10];
+        for(int i=0;i<arr.length;i++){
+            conta[(arr[i]/exp)%10]++;
+        }
+        int out[] = new int[arr.length];
+        for(int i=1;i<10;i++) conta[i]+=conta[i-1];
+        for(int i=arr.length-1;i>=0;i--){
+            out[conta[(arr[i]/exp)%10] - 1] = arr[i];
+            conta[(arr[i]/exp)%10]--;
+        }
+        for(int i=0;i<arr.length;i++){
+            arr[i] = out[i];
+        }
+    }
+
+    public void radix(int[] arr){
+        int mx = arr[0];
+        for(int i=1;i<arr.length;i++){
+            if(arr[i] > mx) mx = arr[i];
+        }
+        for(int exp=1; mx/exp > 0;exp*=10){
+            count(arr,exp);
+        }
+    }
 }

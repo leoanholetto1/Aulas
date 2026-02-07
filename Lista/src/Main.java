@@ -30,12 +30,12 @@ void main() {
     IO.println("----------------------------------------");
 
     //---------------------ORDENAÇÃO------------------------
-    Array array = new Array(1000000);
+    Array array = new Array(10);
 
     Ordenacao ordenacao = new Ordenacao();
-    compararTempo(array.getArr(), ordenacao);
+    //compararTempo(array.getArr(), ordenacao);
     IO.println("Array antes da ordenação:");
-    //array.imprimeArray();
+    array.imprimeArray();
     //ordenacao.bubbleSort(array.getArr());
     //ordenacao.selectionSort(array.getArr());
     //ordenacao.insertionSort(array.getArr());
@@ -44,9 +44,9 @@ void main() {
     //ordenacao.countingSort2(array.getArr());
     //ordenacao.bucketSort(arr,  4);
     //ordenacao.mergeSort(array.getArr(),0,array.getArr().length-1);
-
+    ordenacao.cocktailSort(array.getArr());
     IO.println("Array depois da ordenação:");
-    //array.imprimeArray();
+    array.imprimeArray();
 }
 
 public static void compararTempo(int[] array, Ordenacao ordenacao) {
