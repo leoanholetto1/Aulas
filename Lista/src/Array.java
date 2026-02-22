@@ -15,6 +15,21 @@ public class Array {
         }
     }
 
+    public Array(int tamanho, int min, int max){
+        arr = new int[tamanho];
+        for(int i = 0; i < tamanho; i++){
+            arr[i] = randomInt(min, max);
+        }
+    }
+
+    public Array(int tamanho, int max) {
+        arr = new int[tamanho];
+        int valor = max;
+        for (int i = 0; i < tamanho; i++) {
+            arr[i] = valor--;
+        }
+    }
+
     private int randomInt(int i, int i1) {
         return (int)(Math.random() * (i1 - i)) + i;
     }

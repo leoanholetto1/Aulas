@@ -30,12 +30,12 @@ void main() {
     IO.println("----------------------------------------");
 
     //---------------------ORDENAÇÃO------------------------
-    Array array = new Array(10);
+    Array array = new Array(10000);
 
     Ordenacao ordenacao = new Ordenacao();
-    //compararTempo(array.getArr(), ordenacao);
+    compararTempo(array.getArr(), ordenacao);
     IO.println("Array antes da ordenação:");
-    array.imprimeArray();
+    //array.imprimeArray();
     //ordenacao.bubbleSort(array.getArr());
     //ordenacao.selectionSort(array.getArr());
     //ordenacao.insertionSort(array.getArr());
@@ -44,9 +44,16 @@ void main() {
     //ordenacao.countingSort2(array.getArr());
     //ordenacao.bucketSort(arr,  4);
     //ordenacao.mergeSort(array.getArr(),0,array.getArr().length-1);
-    ordenacao.cocktailSort(array.getArr());
+    //ordenacao.cocktailSort(array.getArr());
+    //ordenacao.radixSort(array.getArr());
+    //ordenacao.gnomeSort(array.getArr());
+    //ordenacao.combSort(array.getArr());
+    //ordenacao.binaryInsertionSort(array.getArr());
+    //ordenacao.quickSort(0,array.getArr().length-1,array.getArr());
+    //ordenacao.quickSortPivo(0,array.getArr().length-1,array.getArr());
+    //ordenacao.shellSort(array.getArr());
     IO.println("Array depois da ordenação:");
-    array.imprimeArray();
+    //array.imprimeArray();
 }
 
 public static void compararTempo(int[] array, Ordenacao ordenacao) {
@@ -54,11 +61,11 @@ public static void compararTempo(int[] array, Ordenacao ordenacao) {
     int[] copia2 = array.clone();
 
     long inicio1 = System.nanoTime();
-    ordenacao.bucketSort(copia1,4);
+    ordenacao.shellSort(copia1);
     long fim1 = System.nanoTime();
 
     long inicio2 = System.nanoTime();
-    ordenacao.mergeSort(copia2,0,copia2.length-1);
+    ordenacao.insertionSort2(copia2);
     long fim2 = System.nanoTime();
 
     System.out.println("Algoritmo 1: " + (fim1 - inicio1) + " ns");

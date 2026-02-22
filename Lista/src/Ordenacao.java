@@ -210,7 +210,7 @@ public class Ordenacao {
         }
     }
 
-    public void radix(int[] arr){
+    public void radixSort(int[] arr){
         int mx = arr[0];
         for(int i=1;i<arr.length;i++){
             if(arr[i] > mx) mx = arr[i];
@@ -219,4 +219,123 @@ public class Ordenacao {
             count(arr,exp);
         }
     }
+
+    public void gnomeSort(int[] arr){
+        int i=0;
+        while(i < arr.length){
+            if(i == 0 || arr[i] >= arr[i-1]) i++;
+            else{
+                int aux = arr[i];
+                arr[i] = arr[i-1];
+                arr[i-1] = aux;
+                i--;
+            }
+        }
+    }
+
+    public void combSort(int [] arr){
+        int gap = arr.length;
+        while(gap != 1){
+            gap = (int) (gap / 1.3);
+            for(int i = 0; i < arr.length-gap; i++){
+                if(arr[i] > arr[i+gap]){
+                    int aux = arr[i];
+                    arr[i] = arr[i+gap];
+                    arr[i+gap] = aux;
+                }
+            }
+        }
+    }
+
+    private int buscaBinary(int[] arr, int ele, int ini,int fim){
+        while(ini<fim){
+            int meio = (ini+fim)/2;
+            if(arr[meio] == ele) return meio+1;
+            if(arr[meio] < ele) ini = meio + 1;
+            else fim = meio - 1;
+        }
+        if(ele > arr[ini]) return ini+1;
+        else return ini;
+    }
+
+    public void binaryInsertionSort(int[] arr){
+        int n = arr.length;
+        for(int i=1;i<n;i++){
+            int j=i-1;
+            int selected = arr[i];
+            int loc = buscaBinary(arr,selected,0,j);
+            while(j >= loc){
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j+1] = selected;
+        }
+    }
+
+    private int particao(int ini,int fim,int[] vet){
+        int i = ini, j = fim, aux;
+        while(i < j){
+            while(i < j && vet[i] <= vet[j]) i++;
+            aux = vet[i];
+            vet[i] = vet[j];
+            vet[j] = aux;
+            while(j > i && vet[j] >= vet[i]) j--;
+            aux = vet[i];
+            vet[i] = vet[j];
+            vet[j] = aux;
+        }
+        return i;
+    }
+
+    public void quickSort(int i,int f,int[] vet){
+        if(i<=f){
+            int j = particao(i,f,vet);
+            quickSort(i,j-1,vet);
+            quickSort(j+1,f,vet);
+        }
+    }
+
+    private int particaoPivo(int ini,int fim,int[] vet){
+        int i = ini, j = fim, aux , pivo = vet[(ini+fim)/2];
+        do{
+            while(pivo > vet[i]) i++;
+            while(pivo < vet[j]) j--;
+            if(i <= j){
+                aux = vet[i];
+                vet[i] = vet[j];
+                vet[j] = aux;
+                j--;
+                i++;
+            }
+        }while(i<=j);
+        return i;
+    }
+
+    public void quickSortPivo(int i,int f,int[] vet){
+        if(i<f){
+            int j = particaoPivo(i,f,vet);
+            quickSortPivo(i,j-1,vet);
+            quickSortPivo(j,f,vet);
+        }
+    }
+
+    public void shellSort(int[] vet){
+        int h=1, n = vet.length;
+        while(h < n) h = h*3+1;
+        h/=3;
+        int c,j;
+        while(h > 0){
+            for(int i = h; i < n; i++){
+                c = vet[i];
+                j = i;
+                while(j>=h && vet[j-h] > c){
+                    vet[j] = vet[j-h];
+                    j-=h;
+                }
+                vet[j] = c;
+            }
+            h/=2;
+        }
+    }
+
 }
