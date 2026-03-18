@@ -338,4 +338,55 @@ public class Ordenacao {
         }
     }
 
+    private void fusao(int[] vet, int[] vet2,int[] original,int seq,int n){
+        int i=0,j=0,k=0,tam = seq;
+        while(i < n){
+            while(k < seq && j < seq){
+                if(vet[j] < vet2[k]){
+                    original[i] = vet[j];
+                    j++;
+                    i++;
+                }
+                else{
+                    original[i] = vet2[k];
+                    k++;
+                    i++;
+                }
+            }
+            while(k < seq){
+                original[i] = vet2[k];
+                k++;
+                i++;
+            }
+            while(j < seq){
+                original[i] = vet[j];
+                j++;
+                i++;
+            }
+            seq+=tam;
+        }
+    }
+
+    private int[] partir(int []vet,int ini,int n){
+        int[] aux = new int[n];
+        int i=0;
+        while(i < n){
+            aux[i] = vet[ini];
+            i++;
+            ini++;
+        }
+        return aux;
+    }
+
+    public void merge2(int[] vet){
+        int seq = 1;
+        int n = vet.length;
+        while(seq < n){
+            int[] vet1 = partir(vet,0,n/2);
+            int[] vet2 = partir(vet,n/2,n/2);
+            fusao(vet1,vet2,vet,seq,n);
+            seq*=2;
+        }
+    }
+
 }
