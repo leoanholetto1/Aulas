@@ -378,7 +378,7 @@ public class Ordenacao {
         return aux;
     }
 
-    public void merge2(int[] vet){
+    public void mergeSort2(int[] vet){
         int seq = 1;
         int n = vet.length;
         while(seq < n){
@@ -389,4 +389,102 @@ public class Ordenacao {
         }
     }
 
+    public void heapSort(int[] vet){
+        int n = vet.length;
+        int pai,e,d,aux;
+        while(n > 0){
+            pai = n/2 - 1;
+            while(pai >= 0){
+                e = 2*pai+1;
+                d = e + 1;
+                int mx = e;
+                if(d < n && vet[e] < vet[d])
+                    mx = d;
+                if(vet[pai] < vet[mx]){
+                    aux = vet[pai];
+                    vet[pai] = vet[mx];
+                    vet[mx] = aux;
+                }
+                pai--;
+            }
+            n--;
+            aux = vet[0];
+            vet[0] = vet[n];
+            vet[n] = aux;
+        }
+    }
+
+    private class Runs{
+        int start,end;
+    }
+
+    private void insertionSortTim(int[] arr, int start,int i,int fim){
+        while(i<=fim){
+            int chave = arr[i];
+            int j=i;
+            while(j > start && arr[j-1] > chave){
+                arr[j] = arr[j-1];
+                j--;
+            }
+            arr[j] = chave;
+            i++;
+        }
+    }
+
+    private int findRuns(int[] arr,Runs[] runs,int n,int minRuns){
+        int i=0,c=0;
+        while(i < n){
+            int start = i;
+            while(i < n-1 && arr[i] <= arr[i+1]) i++;
+            int end = i;
+            if(end-start+1 < minRuns){
+                end = Math.min(start+minRuns-1,n-1);
+                insertionSortTim(arr,start,i,end);
+                i = end;
+            }
+            runs[c].start = start;
+            runs[c].end = end;
+            c++;
+            i++;
+        }
+        return c;
+    }
+
+    private void mergeTim(int[] arr,int ini,int fim,int ini2,int fim2){
+        int[] aux = new int[fim2 - ini + 1];
+        int i = ini, j = ini2, tl = 0;
+        while(i <= fim && j <= fim2){
+            if(arr[i] < arr[j]) aux[tl++] = arr[i++];
+            else aux[tl++] = arr[j++];
+        }
+        while(i <= fim) aux[tl++] = arr[i++];
+        while(j <= fim2) aux[tl++] = arr[j++];
+        for(int k=0;k<tl;k++){
+            arr[ini+k] = aux[k];
+        }
+    }
+
+    public void timSort(int[] arr,int minRuns){
+        int n = arr.length;
+        Runs[] runs = new Runs[n];
+        for (int i = 0; i < n; i++) {
+            runs[i] = new Runs();
+        }
+        int tl = findRuns(arr,runs,n,minRuns);
+        while(tl > 1){
+            int newTl=0;
+            for(int i=0;i<tl-1;i+=2){
+                mergeTim(arr,runs[i].start,runs[i].end,runs[i+1].start,runs[i+1].end);
+                runs[newTl].start = runs[i].start;
+                runs[newTl].end = runs[i+1].end;
+                newTl++;
+            }
+            if(tl%2==1){
+                runs[newTl].start = runs[tl-1].start;
+                runs[newTl].end = runs[tl-1].end;
+                newTl++;
+            }
+            tl = newTl;
+        }
+    }
 }
